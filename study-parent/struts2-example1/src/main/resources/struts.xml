@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+    <constant name="struts.devMode" value="true"/>
+
+    <!-- 使用package来组织模块，name用于其他包引用当前包，extends用于继承于什么包，可以继承包的所有属性，通常继承struts-default -->
+    <package name="product" extends="struts-default" namespace="/product">
+        <!-- 配置一个action： 一个struts2的请求就是一个action -->
+        <action name="add">
+            <!-- type： 结果类型，默认是dispatcher，还有redirect -->
+            <result>/WEB-INF/product/add.jsp</result>
+        </action>
+
+        <action name="save" class="edu.zhku.cn.example.action.ProductMgrController" method="save">
+            <result name="details">/WEB-INF/product/details.jsp</result>
+        </action>
+
+        <action name="action1" class="edu.zhku.cn.example.action.ProductMgrController" method="action1">
+            <result>/WEB-INF/product/action1.jsp</result>
+        </action>
+    </package>
+    <!--
+    <include file="example.xml"/>
+
+    <package name="default" namespace="/" extends="struts-default">
+
+        <default-action-ref name="index"/>
+
+        <action name="index">
+            <result type="redirectAction">
+                <param name="actionName">HelloWorld</param>
+                <param name="namespace">/example</param>
+            </result>
+        </action>
+
+    </package>-->
+
+    <!-- Add addition packages and configuration here. -->
+</struts>

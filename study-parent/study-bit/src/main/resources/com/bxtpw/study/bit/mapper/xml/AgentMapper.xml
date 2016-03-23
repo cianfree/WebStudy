@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bxtpw.study.bit.mapper.AgentMapper">
+
+    <resultMap type="com.bxtpw.study.bit.domain.Agent" id="BaseAgentResultMap">
+        <result column="id" property="id"/>
+        <result column="tag" property="tag" javaType="Long"/>
+    </resultMap>
+
+    <insert id="insertAgent" parameterType="com.bxtpw.study.bit.domain.Agent" keyColumn="id" keyProperty="id"
+            useGeneratedKeys="true">
+        INSERT INTO study_bit_agent (tag) VALUES (#{tag})
+    </insert>
+
+    <select id="queryAgentList" resultMap="BaseAgentResultMap" parameterType="com.bxtpw.study.bit.query.AgentQuery">
+        SELECT
+        id, tag
+        FROM study_bit_agent
+        <where>
+            <if test="trueTag > 0"><![CDATA[ AND tag & #{trueTag} = #{trueTag}]]></if>
+            <if test="falseTag > 0"><![CDATA[ AND tag & #{falseTag} = 0]]></if>
+        </where>
+    </select>
+
+    <select id="getAgentById" resultMap="BaseAgentResultMap">
+        SELECT
+            id,
+            tag
+        FROM study_bit_agent
+        WHERE id = #{id}
+    </select>
+
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug">
+
+	<properties>
+        <!-- 
+        <property name="logDir">${web:rootDir}logs</property>
+         -->
+        <property name="logDir">logs</property>
+        <property name="pattern">%logger{2}:%L - %m%n</property>
+    </properties>
+    
+	<!-- Define custom levels before using them for filtering below. -->
+	<CustomLevels>
+	  <CustomLevel name="DELETE" intLevel="1" />
+	  <CustomLevel name="UPDATE" intLevel="2" />
+	  <CustomLevel name="ADD" intLevel="3" />
+	  <CustomLevel name="NOTICE" intLevel="4" />
+	</CustomLevels>
+	
+	<Appenders>
+		
+		<!-- 控制台输出 -->
+		<Console name="CONSOLE" target="SYSTEM_OUT">
+		  <PatternLayout pattern="${pattern}"/>
+		</Console>
+	</Appenders>
+	<Loggers>
+		<logger name="org.springframework" level="DEBUG"></logger>
+	
+		<logger name="org.mybatis.spring" level="DEBUG"></logger>
+		
+		<Root level="debug">
+		  <AppenderRef ref="CONSOLE"/>
+		</Root>
+	</Loggers>
+</Configuration>
